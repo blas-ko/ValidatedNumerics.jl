@@ -28,7 +28,7 @@ import Base:
 
 
 export
-    Interval,
+    Interval, AbstractInterval,
     @interval, @biginterval, @floatinterval, @make_interval,
     get_interval_rounding, set_interval_rounding,
     diam, radius, mid, mag, mig, hull, isinside,

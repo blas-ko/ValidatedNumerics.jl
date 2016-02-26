@@ -26,6 +26,8 @@ import Base:
     ⊆, eps,
     floor, ceil, trunc, sign, round
 
+export
+    @I_str
 
 export
     Interval, AbstractInterval,

@@ -153,7 +153,7 @@ function representation(X::IntervalBox, format=nothing)
 
     buffer = IOBuffer()
 
-    if display_params.format==:full
+    if format==:full
         print(buffer, "IntervalBox(")
 
         for i in 1:length(X)-1

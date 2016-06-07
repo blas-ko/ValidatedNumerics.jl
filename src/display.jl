@@ -151,27 +151,12 @@ function representation(X::IntervalBox, format=nothing)
         format = display_params.format  # default
     end
 
-    buffer = IOBuffer()
-
     if format==:full
-        print(buffer, "IntervalBox(")
-
-        for i in 1:length(X)-1
-            print(buffer, X[i], ", ")
-        end
-        print(buffer, X[end], ")")
-
-
+        return  string("IntervalBox(", join(X, ", "), ")")
     else
-
-        for i in 1:length(X)-1
-            print(buffer, X[i], " × ")
-        end
-        print(buffer, X[end])
-
+        return join(X, " × ")
     end
 
-    return takebuf_string(buffer)
 end
 
 

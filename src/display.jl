@@ -64,7 +64,7 @@ end
 round_string(x::Real, digits::Int, r::RoundingMode) = round_string(big(x), digits, r)
 
 
-function representation(a::Interval, format=nothing)
+function basic_representation(a::Interval, format=nothing)
     if isempty(a)
         return "∅"
     end
@@ -95,7 +95,11 @@ function representation(a::Interval, format=nothing)
         output = "$m ± $r"
     end
 
-    output
+    return output
+end
+
+function representation(a::Interval, format=nothing)
+    return basic_representation(a, format)
 end
 
 
@@ -113,13 +117,12 @@ function representation(a::Interval{BigFloat}, format=nothing)
         format = display_params.format  # default
     end
 
-
     if format == :standard
-        string( invoke(representation, (Interval, Symbol), a, format),
-                    subscriptify(precision(a.lo)) )
+        return string(basic_representation(a, format),
+                      subscriptify(precision(a.lo)) )
 
     elseif format == :full
-        invoke(representation, (Interval, Symbol), a, format)
+        return string(basic_representation(a, format))
     end
 end
 
@@ -134,12 +137,12 @@ function representation(a::DecoratedInterval, format=nothing)
         return "DecoratedInterval($(representation(interval_part(a), format)), $(decoration(a)))"
     end
 
-    interval = representation(interval_part(a), format)
+    interval = basic_representation(interval_part(a), format)
 
     if display_params.decorations
-        string(interval, "_", decoration(a))
+        return string(interval, "_", decoration(a))
     else
-        interval
+        return interval
     end
 
 end
@@ -152,7 +155,7 @@ function representation(X::IntervalBox, format=nothing)
     end
 
     if format==:full
-        return  string("IntervalBox(", join(X, ", "), ")")
+        return string("IntervalBox(", join(X, ", "), ")")
     else
         return join(X, " × ")
     end

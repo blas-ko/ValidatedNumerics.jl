@@ -84,7 +84,7 @@ facts("displaymode tests") do
         @fact string(a) --> "[1, 1]₁₂₈"
 
         displaymode(format=:full)
-        @fact string(a) --> "Interval(1.000000000000000000000000000000000000000, 1.000000000000000000000000000000000000000)"
+        @fact string(a) --> "Interval(1.000000000000000000000000000000000000000, 1.000000000000000000000000000000000000000)₁₂₈"
 
 
         a = DecoratedInterval(big(2), big(3), com)
@@ -96,7 +96,7 @@ facts("displaymode tests") do
         @fact string(a) --> "[2, 3]₁₂₈_com"
 
         displaymode(format=:full)
-        @fact string(a) --> "DecoratedInterval(Interval(2.000000000000000000000000000000000000000, 3.000000000000000000000000000000000000000), com)"
+        @fact string(a) --> "DecoratedInterval(Interval(2.000000000000000000000000000000000000000, 3.000000000000000000000000000000000000000), com)₁₂₈"
 
     end
 

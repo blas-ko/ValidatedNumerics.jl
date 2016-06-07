@@ -117,13 +117,9 @@ function representation(a::Interval{BigFloat}, format=nothing)
         format = display_params.format  # default
     end
 
-    if format == :standard
-        return string(basic_representation(a, format),
-                      subscriptify(precision(a.lo)) )
+    return string(basic_representation(a, format),
+                  subscriptify(precision(a.lo)) )
 
-    elseif format == :full
-        return string(basic_representation(a, format))
-    end
 end
 
 
@@ -137,7 +133,7 @@ function representation(a::DecoratedInterval, format=nothing)
         return "DecoratedInterval($(representation(interval_part(a), format)), $(decoration(a)))"
     end
 
-    interval = basic_representation(interval_part(a), format)
+    interval = representation(interval_part(a), format)
 
     if display_params.decorations
         return string(interval, "_", decoration(a))
